@@ -1,0 +1,10 @@
+.ulList li{
+			margin-left: 20px;
+			list-style: none;
+			display: flex;
+}
+.ulList{
+	display: flex;
+	line-height: 35px;
+}
+		
