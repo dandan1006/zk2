@@ -9,8 +9,74 @@
     <script type="text/javascript" charset="utf-8">
       	mui.init();
     </script>
+	<style>
+		.mui-content{
+			margin-top: 50px;
+		}
+	</style>
 </head>
 <body>
-	
+	<header class="mui-bar mui-bar-nav">
+		<h1 class="mui-title">标题</h1>
+	</header>
+	<div class="mui-content">
+		<div class="mui-scroll-wrapper >
+		<div class="mui-scroll" id="pullrefresh">
+			<div class="mui-content" style="background-color:#fff">
+				<ul class="mui-table-view mui-grid-view list">
+					<!-- <li class="mui-table-view-cell mui-media mui-col-xs-6">
+						<a href="#">
+							<img class="mui-media-object" src="images/1.png">
+							<div class="mui-media-body">幸福就是可以一起睡觉</div></a>
+							<a href="">￥69</a>
+							</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-6">
+					<a href="#">
+						<img class="mui-media-object" src="images/1.png">
+						<div class="mui-media-body">幸福就是可以一起睡觉</div></a>
+						<a href="">￥69</a>
+						</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6">
+						<a href="#"><img class="mui-media-object" src="./images/cbd.jpg">
+							<div class="mui-media-body">Color of SIP CBD</div></a></li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6">
+						<a href="#">
+							<img class="mui-media-object" src="./images/yuantiao.jpg">
+							<div class="mui-media-body">静静看这世界</div></a></li> -->
+				</ul>    
+			</div>
+			
+		</div>
+	</div>
+	</div>
+		<script>
+				mui('.mui-scroll-wrapper').scroll({
+				deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			});
+			
+			mui.ajax('/users',{
+				dataType:'json',
+				success:function(res){
+					renderProduct(res.data)
+				}
+			})
+			
+			var imgUrl='http://localhost:3000/images/';
+			function renderProduct(data){
+				var str='';
+				data.forEach(function(item){
+					str+=`
+						<li class="mui-table-view-cell mui-media mui-col-xs-6">
+								<a href="#">
+							<img class="mui-media-object" src="${imgUrl}${item.img}">
+							<div class="mui-media-body">${item.title}</div></a>
+						
+							</li>`
+					
+				})
+				var list=document.querySelector('.list');
+				list.innerHTML=str;
+			}
+		</script>
 </body>
 </html>
